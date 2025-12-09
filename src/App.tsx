@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Input } from "./components/Input";
+import { Toast } from "./components/Toast";
+import { SidebarMenu, type MenuItem } from "./components/SidebarMenu";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const menuItems: MenuItem[] = [
+    { label: "Home" },
+    { label: "About" },
+    { label: "Services", children: [{ label: "Web" }, { label: "Mobile" }] },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: 20 }}>
+      <h1>Тест компонентов</h1>
+
+      {/* Input */}
+      <h2>Input</h2>
+      <Input
+        type="text"
+        clearable
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Введите текст"
+      />
+
+      {/* Toast */}
+      <h2>Toast</h2>
+      <button onClick={() => setShowToast(true)}>Показать уведомление</button>
+      {showToast && (
+        <Toast
+          message="Привет! Это Toast"
+          type="success"
+          duration={3000}
+          onClose={() => setShowToast(false)}
+        />
+      )}
+
+      {/* SidebarMenu */}
+      <h2>SidebarMenu</h2>
+      <button onClick={() => setSidebarOpen(true)}>Открыть меню</button>
+      <SidebarMenu
+        items={menuItems}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
