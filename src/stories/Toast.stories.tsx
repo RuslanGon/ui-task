@@ -16,7 +16,6 @@ const ToastWrapper = (args: any) => {
   return show ? <Toast {...args} onClose={() => setShow(false)} /> : null;
 };
 
-// Stories
 export const Success: Story = {
   render: () => <ToastWrapper message="Success!" type="success" duration={3000} />,
 };

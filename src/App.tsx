@@ -17,8 +17,6 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <h1>Тест компонентов</h1>
-
-      {/* Input */}
       <h2>Input</h2>
       <Input
         type="text"
@@ -27,8 +25,6 @@ function App() {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Введите текст"
       />
-
-      {/* Toast */}
       <h2>Toast</h2>
       <button onClick={() => setShowToast(true)}>Показать уведомление</button>
       {showToast && (
